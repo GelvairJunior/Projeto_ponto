@@ -1,5 +1,16 @@
 import sqlite3 
-import tkinter as tk
+from tkinter import *
+
+window = Tk()
+window.geometry("1250x800")
+window.title("Pagina de controle de informação dos funcionarios ")
+window.config(background="#5cfcff")
+
+label = Label(window, text='O que deseja fazer? \n [1] Cadastrar Funcionario \n [2] Listar Funcionarios \n [3] Atualizar/corrigir Funcionario \n [4] Deletar Funcionario \n [5] Sair \n : ')
+label.pack()
+
+window.mainloop()
+
 
 class Server():
     def __init__(self, db_path='ponto.db'):
