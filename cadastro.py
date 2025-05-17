@@ -1,16 +1,6 @@
 import sqlite3 
 from tkinter import *
 
-window = Tk()
-window.geometry("1250x800")
-window.title("Pagina de controle de informação dos funcionarios ")
-window.config(background="#5cfcff")
-
-label = Label(window, text='O que deseja fazer? \n [1] Cadastrar Funcionario \n [2] Listar Funcionarios \n [3] Atualizar/corrigir Funcionario \n [4] Deletar Funcionario \n [5] Sair \n : ')
-label.pack()
-
-window.mainloop()
-
 
 class Server():
     def __init__(self, db_path='ponto.db'):
@@ -107,26 +97,3 @@ class Funcionario():
 
                 print(f"Funcionario {nome} Deletado")
                 res = str(input("Quer Deletar algum mais funcionario:(sim/nao) "))
-
-
-if __name__ == "__main__":
-    servidor = Server()
-    sistema = Funcionario(servidor)
-
-    escolha = 0
-    while escolha < 5:
-    
-        escolha = int(input('O que deseja fazer? \n [1] Cadastrar Funcionario \n [2] Listar Funcionarios \n [3] Atualizar/corrigir Funcionario \n [4] Deletar Funcionario \n [5] Sair \n : '))
-
-        if escolha == 1:
-            sistema.cadastrar_funcionarios()
-
-        if escolha == 2:
-            sistema.Listar_Funcionarios()
-
-        if escolha == 3:
-            sistema.Atualizar_Funcionario()
-
-        if escolha == 4:
-            sistema.Deletar_Funcionario()
-    print("Até mais :) ")

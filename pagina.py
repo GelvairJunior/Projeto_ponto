@@ -19,7 +19,7 @@ window.config(background="blue")
 
 ###
 
-photo = PhotoImage(file='c\\users\\coloqueumaimagen')
+##photo = PhotoImage(file='c\\users\\coloqueumaimagen')
 
 
 label = Label(window, 
@@ -31,17 +31,18 @@ label = Label(window,
         bd=10,
         padx=20,
         pady=20,
-        image=photo,
+        ##image=photo,
         compound='bottom'
         )
 #label2 = Label(window, photo)
 
 
 label.pack()
-
 #label.place(x = 0,y = 20)#x a largura y altura
 
 
+button = Button(window, text="escolha uma opção")
+button.pack()
+
 
 window.mainloop()# faz aparecer a imagem na tela do pc, lista os events 
-
