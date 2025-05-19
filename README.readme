@@ -1,0 +1,40 @@
+# Aqui Iremos detalhar o projeto Ponto
+
+### Banco de dados
+o banco de dados irá ser em sqlite pelo escopo do projeto, porém podemos atualizalo mais tardio para MySQL
+
+será apenas um banco de dados "ponto.db" Para facilitar consultas, teremos aplicar uma forma da aplicação conversar com o banco de dados de forma mais direta
+
+Até então teremos 3 tabelas 
+    Funcionario
+    Registro do ponto 
+    Localização
+
+As colunas da tabela Funcionario será
+    ID
+    Name
+    CPF
+    Data_Nascimento
+    Endereço
+    Inicio_Do_Contrato
+    Fim_Do_Contrato
+    Cargo
+    Salario
+
+As colunas da tabela Registro_Ponto será
+    ID_Ponto
+    ID_Funcionario
+    ID_Localizacao
+    Data_do_ponto
+    Time_de_entrada
+    Time_Almoço
+    Time_de_saida
+    Tipo_do_Ponto
+    Status
+
+As colunas da tabela Localização será
+    ID_Localizacao
+    Longitude
+    Latitude
+    Endereço
+  Podendo sair
