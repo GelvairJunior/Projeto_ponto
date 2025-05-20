@@ -1,4 +1,4 @@
-# Aqui Iremos detalhar o projeto Ponto
+#Aqui Iremos detalhar o projeto Ponto
 
 ### Banco de dados
 o banco de dados irá ser em sqlite pelo escopo do projeto, porém podemos atualizalo mais tardio para MySQL
