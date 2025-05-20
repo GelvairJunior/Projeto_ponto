@@ -18,19 +18,12 @@ class Endereço():
 
 
 class Funcionario():
+    servidor = Server()
+    
     def __init__(self, server):
         self.server = server
 
     def cadastrar_funcionarios(self, name, cpf, data_nascimento, endereço, inicio_contrato, fim_contrato, salario, cargo):
-    
-        self.Name = name
-        self.CPF = cpf
-        self.Data_nascimento = data_nascimento
-        self.Endereço = endereço
-        self.Inicio_contrato = inicio_contrato
-        self.Fim_contrato = fim_contrato
-        self.Salario = salario
-        self.Cargo = cargo
 
         with sqlite3.connect(self.server.db_path) as connection:
             cursor = connection.cursor()
@@ -49,6 +42,7 @@ class Funcionario():
             print('Funcionário Cadastrado com Sucesso')
 
     def Listar_Funcionarios(self):
+        
         with sqlite3.connect(self.server.db_path) as connection:
 
             cursor = connection.cursor()
@@ -64,16 +58,6 @@ class Funcionario():
                 print(funcionario)
     
     def Atualizar_Funcionario(self, ID, name, cpf, data_nascimento, endereço, inicio_contrato, fim_contrato, salario, cargo):
-        
-        self.ID = ID
-        self.Name = name
-        self.CPF = cpf
-        self.Data_nascimento = data_nascimento
-        self.Endereço = endereço
-        self.Inicio_contrato = inicio_contrato
-        self.Fim_contrato = fim_contrato
-        self.Salario = salario
-        self.Cargo = cargo
 
         with sqlite3.connect(self.server.db_path) as connection:
             cursor = connection.cursor()
@@ -84,18 +68,13 @@ class Funcionario():
             WHERE ID_FUNCIONARIO = ?;
             '''
 
-            print(f"Qual o ID {ID}")
-
             cursor.execute(update_query, (name, cpf, data_nascimento, str(endereço), inicio_contrato, fim_contrato, salario, cargo, ID))
 
             connection.commit()
 
-            print(f"Funcionario {name} foi atualizado/corrigido")
+            print(f"Funcionario {self.name} foi atualizado/corrigido")
 
     def Deletar_Funcionario(self, ID, name):
-        
-        self.ID = ID
-        self.Name = name
 
         with sqlite3.connect(self.server.db_path) as connection:
             cursor = connection.cursor()
@@ -105,12 +84,8 @@ class Funcionario():
             WHERE ID_FUNCIONARIO = ?;
             '''
 
-            ID = int(input("Qual é o ID do funcionario que quer remover? "))
-            name = str(input("Qual o nome do funcionario? "))
-
             cursor.execute(delete_query, (ID,))
 
             connection.commit()
 
             print(f"Funcionario {name} Deletado")
-            res = str(input("Quer Deletar algum mais funcionario:(sim/nao) "))
