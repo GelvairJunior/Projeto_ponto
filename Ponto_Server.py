@@ -67,49 +67,64 @@ class Cadastro_page():
         label = Label(window, text='Vamos Cadastrar o funcionario')
         label.pack()
 
-        Label(window, text="Nome").grid(row=0, column=0)
-        entry_Name = Entry(window)
-        entry_Name.grid(row=0, column=1)
+        label_name = Label(window, text="Nome")
+        label_name.pack()
+        self.entry_Name = Entry(window)
+        self.entry_Name.pack()
 
-        Label(window, text="CPF").grid(row=1, column=0)
-        entry_cpf = Entry(window)
-        entry_cpf.grid(row=1, column=1)
+        label_cpf = Label(window, text="CPF")
+        label_cpf.pack()
+        self.entry_cpf = Entry(window)
+        self.entry_cpf.pack()
 
-        Label(window, text="Data de Nascimento").grid(row=2, column=0)
-        entry_DataNascimento = Entry(window)
-        entry_DataNascimento.grid(row=2, column=1)
+        labelnasc = Label(window, text="Data de Nascimento")
+        labelnasc.pack()
+        self.entry_DataNascimento = Entry(window)
+        self.entry_DataNascimento.pack()
 
-        Label(window, text="RUA").grid(row=3, column=1)
-        entry_Rua = Entry(window)
-        entry_Rua.grid(row=3, column=1)
+        label_rua = Label(window, text="RUA")
+        label_rua.pack()
+        self.entry_Rua = Entry(window)
+        self.entry_Rua.pack()
 
-        Label(window, text="Cidade").grid(row=4, column=0)
-        entry_Cidade = Entry(window)
-        entry_Cidade.grid(row=4, column=1)
+        label_Cidade = Label(window, text="Cidade")
+        label_Cidade.pack()
+        self.entry_Cidade = Entry(window)
+        self.entry_Cidade.pack()
 
-        Label(window, text="Estado").grid(row=5, column=0)
-        entry_Estado = Entry(window)
-        entry_Estado.grid(row=5, column=1)
+        label_Estado = Label(window, text="Estado")
+        label_Estado.pack()
+        self.entry_Estado = Entry(window)
+        self.entry_Estado.pack()
 
-        Label(window, text="Cep").grid(row=6, column=0)
-        entry_Cep = Entry(window)
-        entry_Cep.grid(row=6, column=1)
+        label_cep = Label(window, text="Cep")
+        label_cep.pack()
+        self.entry_Cep = Entry(window)
+        self.entry_Cep.pack()
+        
+        label_ini = Label(window, text="Data do Inicio do Contrato")
+        label_ini.pack()
+        self.entry_InicioContrato = Entry(window)
+        self.entry_InicioContrato.pack()
 
-        Label(window, text="Data do Inicio do Contrato").grid(row=7, column=0)
-        entry_InicioContrato = Label(window)
-        entry_InicioContrato.grid(row=7, column=1)
+        label_fim = Label(window, text="Data do Fim do Contrato")
+        label_fim.pack()
+        self.entry_FimContrato = Entry(window)
+        self.entry_FimContrato.pack()
 
-        Label(window, text="Data do Fim do Contrato").grid(row=8, column=0)
-        entry_FimContrato = Label(window)
-        entry_FimContrato.grid(row=8, column=1)
+        label_salario = Label(window, text="Salario")
+        label_salario.pack()
+        self.entry_Salario = Entry(window)
+        self.entry_Salario.pack()
 
-        Label(window, text="Salario").grid(row=9, column=0)
-        entry_Salario = Entry(window)
-        entry_Salario.grid(row=9, column=1)
-
-        Label(window, text="Cargo").grid(row=10, column=0)
-        entry_Cargo = Entry(window)
-        entry_Cargo.grid(row=10, column=1)
+        label_cargo = Label(window, text="Cargo")
+        label_cargo.pack()
+        self.entry_Cargo = Entry(window)
+        self.entry_Cargo.pack()
+        
+        botao_obter = Button(window, text="Enviar as Informações", command=self.Cadastrar)
+        botao_obter.pack()
+        
         
         
         window.mainloop()
@@ -127,7 +142,9 @@ class Cadastro_page():
         salario = self.entry_Salario.get()
         cargo = self.entry_Cargo.get()
 
-        self.sistema(name, cpf, data_nascimento, Rua, Cidade, Estado, Cep, inicio_contrato, fim_contrato, salario, cargo)
+    
+        endereço = (f"{Rua} {Cidade} {Estado} {Cep}")
+        self.sistema.cadastrar_funcionarios(name, cpf, data_nascimento, endereço, inicio_contrato, fim_contrato, salario, cargo)
     
 
 
@@ -136,7 +153,7 @@ class Atualizar_page():
     sistema = cadastro.Funcionario(servidor)
 
 
-    def ____init__(self):
+    def __init__(self):
         window = Toplevel()
         window.geometry("600x600")
         window.title("Pagina de controle de informação dos funcionarios ")
@@ -144,60 +161,77 @@ class Atualizar_page():
 
         label = Label(window, text='Vamos Atualizar o funcionario')
         label.pack()
+        
+        label_ID = Label(window, text="Qual o ID do funcionario")
+        label_ID.pack()
+        self.entry_ID = Entry(window)
+        self.entry_ID.pack
 
-        Label(window, text="ID").grid(row=11, column=0)
-        entry_ID = Entry(window)
-        entry_ID.grid(row=11, column=1)
+        label_name = Label(window, text="Nome")
+        label_name.pack()
+        self.entry_Name = Entry(window)
+        self.entry_Name.pack()
 
-        Label(window, text="Nome").grid(row=0, column=0)
-        entry_Name = Entry(window)
-        entry_Name.grid(row=0, column=1)
+        label_cpf = Label(window, text="CPF")
+        label_cpf.pack()
+        self.entry_cpf = Entry(window)
+        self.entry_cpf.pack()
 
-        Label(window, text="CPF").grid(row=1, column=0)
-        entry_cpf = Entry(window)
-        entry_cpf.grid(row=1, column=1)
+        labelnasc = Label(window, text="Data de Nascimento")
+        labelnasc.pack()
+        self.entry_DataNascimento = Entry(window)
+        self.entry_DataNascimento.pack()
 
-        Label(window, text="Data de Nascimento").grid(row=2, column=0)
-        entry_DataNascimento = Entry(window)
-        entry_DataNascimento.grid(row=2, column=1)
+        label_rua = Label(window, text="RUA")
+        label_rua.pack()
+        self.entry_Rua = Entry(window)
+        self.entry_Rua.pack()
 
-        Label(window, text="RUA").grid(row=3, column=1)
-        entry_Rua = Entry(window)
-        entry_Rua.grid(row=3, column=1)
+        label_Cidade = Label(window, text="Cidade")
+        label_Cidade.pack()
+        self.entry_Cidade = Entry(window)
+        self.entry_Cidade.pack()
 
-        Label(window, text="Cidade").grid(row=4, column=0)
-        entry_Cidade = Entry(window)
-        entry_Cidade.grid(row=4, column=1)
+        label_Estado = Label(window, text="Estado")
+        label_Estado.pack()
+        self.entry_Estado = Entry(window)
+        self.entry_Estado.pack()
 
-        Label(window, text="Estado").grid(row=5, column=0)
-        entry_Estado = Entry(window)
-        entry_Estado.grid(row=5, column=1)
+        label_cep = Label(window, text="Cep")
+        label_cep.pack()
+        self.entry_Cep = Entry(window)
+        self.entry_Cep.pack()
+        
+        label_ini = Label(window, text="Data do Inicio do Contrato")
+        label_ini.pack()
+        self.entry_InicioContrato = Entry(window)
+        self.entry_InicioContrato.pack()
 
-        Label(window, text="Cep").grid(row=6, column=0)
-        entry_Cep = Entry(window)
-        entry_Cep.grid(row=6, column=1)
+        label_fim = Label(window, text="Data do Fim do Contrato")
+        label_fim.pack()
+        self.entry_FimContrato = Entry(window)
+        self.entry_FimContrato.pack()
 
-        Label(window, text="Data do Inicio do Contrato").grid(row=7, column=0)
-        entry_InicioContrato = Label(window)
-        entry_InicioContrato.grid(row=7, column=1)
+        label_salario = Label(window, text="Salario")
+        label_salario.pack()
+        self.entry_Salario = Entry(window)
+        self.entry_Salario.pack()
 
-        Label(window, text="Data do Fim do Contrato").grid(row=8, column=0)
-        entry_FimContrato = Label(window)
-        entry_FimContrato.grid(row=8, column=1)
-
-        Label(window, text="Salario").grid(row=9, column=0)
-        entry_Salario = Entry(window)
-        entry_Salario.grid(row=9, column=1)
-
-        Label(window, text="Cargo").grid(row=10, column=0)
-        entry_Cargo = Entry(window)
-        entry_Cargo.grid(row=10, column=1)
+        label_cargo = Label(window, text="Cargo")
+        label_cargo.pack()
+        self.entry_Cargo = Entry(window)
+        self.entry_Cargo.pack()
+        
+        botao_obter = Button(window, text="Enviar as Informações", command=self.Atualizar)
+        botao_obter.pack()
+        
+        
         
         window.mainloop()
 
     def Atualizar(self):
         ID = self.entry_ID.get()
-        Name = self.entry_Name.get()
+        name = self.entry_Name.get()
         cpf = self.entry_cpf.get()
         Data_nascimento = self.entry_DataNascimento.get()
         Rua = self.entry_Rua.get()
@@ -208,8 +242,9 @@ class Atualizar_page():
         Fim_contrato = self.entry_FimContrato.get()
         Salario = self.entry_Salario.get()
         Cargo = self.entry_Cargo.get()
-
-        self.sistema(ID, Name, cpf, Data_nascimento, Rua, Cidade, Estado, Cep, Inicio_contrato, Fim_contrato, Salario, Cargo)
+        
+        endereço = (f"{Rua}, {Cidade}, {Estado}, {Cep}")
+        self.sistema.cadastrar_funcionarios(ID, name, cpf, Data_nascimento, endereço, Inicio_contrato, Fim_contrato, Salario, Cargo)
 
 
 
@@ -228,22 +263,24 @@ class Deletar_page():
         label = Label(window, text='Vamos Deletar o funcionario')
         label.pack()
 
-        Label(window, text="ID").grid(row=0, column=0)
-        entry_ID = Entry(window)
-        entry_ID.grid(row=0, column=1)
+        label_ID = Label(window, text="Qual o ID do funcionario")
+        label_ID.pack()
+        self.entry_ID = Entry(window)
+        self.entry_ID.pack
 
-        Label(window, text="Nome").grid(row=1, column=0)
-        entry_Name = Entry(window)
-        entry_Name.grid(row=1, column=1)
+        label_name = Label(window, text="Nome")
+        label_name.pack()
+        self.entry_Name = Entry(window)
+        self.entry_Name.pack()
 
         window.mainloop()
     
     
     def Deletar(self):
         ID = self.entry_ID.get()
-        Name = self.entry_Name.get()
+        name = self.entry_Name.get()
 
-        self.sistema(ID, Name)
+        self.sistema.cadastrar_funcionarios(ID, name)
 
 
 

@@ -8,13 +8,13 @@ class Server():
 
 class Endereço():
     def __init__(self, rua, cidade, estado, cep):
-        self.Rua = rua
-        self.Cidade = cidade
-        self.Estado = estado
-        self.Cep = cep
+        self.rua = rua
+        self.cidade = cidade
+        self.estado = estado
+        self.cep = cep
     
     def __str__(self):
-        return f"{self.Rua}, {self.Cidade} - {self.Estado}, {self.Cep}"
+        return f"{self.rua}, {self.cidade} - {self.estado}, {self.cep}"
 
 
 class Funcionario():
@@ -34,7 +34,7 @@ class Funcionario():
                 VALUES (?, ?, ?, ?, ?, ?, ?, ?)
             '''
 
-            funcionario_inf = (name, cpf, data_nascimento, str(endereço), inicio_contrato, fim_contrato, salario, cargo)
+            funcionario_inf = (name, cpf, data_nascimento, endereço, inicio_contrato, fim_contrato, salario, cargo)
 
             cursor.execute(insert_query, funcionario_inf)
             connection.commit()
@@ -68,7 +68,7 @@ class Funcionario():
             WHERE ID_FUNCIONARIO = ?;
             '''
 
-            cursor.execute(update_query, (name, cpf, data_nascimento, str(endereço), inicio_contrato, fim_contrato, salario, cargo, ID))
+            cursor.execute(update_query, (name, cpf, data_nascimento, endereço, inicio_contrato, fim_contrato, salario, cargo, ID))
 
             connection.commit()
 
