@@ -1,12 +1,20 @@
 from tkinter import *
-import cadastro
+import Funcionario
 
 
-class Ponto_Server():
+class Funcionario_page():
+    def null(self):
+        self.null
+
+class Ponto_page():
+    def null(self):
+        self.null
+
+class RH_page():
     
     def __init__(self):
-        servidor = cadastro.Server()
-        sistema = cadastro.Funcionario(servidor)
+        servidor = Funcionario.Server()
+        sistema = Funcionario.Funcionario(servidor)
 
         window = Tk()
         window.geometry("600x600")
@@ -55,8 +63,8 @@ class Ponto_Server():
 
 
 class Cadastro_page():
-    servidor = cadastro.Server()
-    sistema = cadastro.Funcionario(servidor)
+    servidor = Funcionario.Server()
+    sistema = Funcionario.Funcionario(servidor)
 
     def __init__(self):
         window = Toplevel()
@@ -149,8 +157,8 @@ class Cadastro_page():
 
 
 class Atualizar_page():
-    servidor = cadastro.Server()
-    sistema = cadastro.Funcionario(servidor)
+    servidor = Funcionario.Server()
+    sistema = Funcionario.Funcionario(servidor)
 
 
     def __init__(self):
@@ -251,8 +259,8 @@ class Atualizar_page():
 
 
 class Deletar_page():
-    servidor = cadastro.Server()
-    sistema = cadastro.Funcionario(servidor)
+    servidor = Funcionario.Server()
+    sistema = Funcionario.Funcionario(servidor)
 
     def __init__(self):
         window = Toplevel()
@@ -286,4 +294,4 @@ class Deletar_page():
 
 
 if __name__ == "__main__":
-    Janela = Ponto_Server()
+    Janela = RH_page()
