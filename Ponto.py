@@ -1,17 +1,41 @@
 import sqlite3
-
+import Funcionario
+from datetime import datetime
+import geocoder
+import folium
 
 class Ponto_register():
-    def register(self, id_funcionario, data_registro, hora_entrada, hora_saida, hora_almoço, localização, tipo_ponto, status):
-        self.id_funcionario = id_funcionario
-        self.data_registro = data_registro
-        self.hora_entrada = hora_entrada
-        self.hora_saida = hora_saida
-        self.hora_almoço = hora_almoço
-        self.localização = localização
-        self.tipo_ponto = tipo_ponto
-        self.status = status
+    def __init__(self, login, senha, Server):
+        self.login = login
+        self.senha = senha
+        self.server = Server()
 
+
+    def register(self):
+        data_registro = datetime.now().strftime('%Y-%m-%d')
+        status = ''
+        return (data_registro)
+
+    def entrada():
+        hora_entrada = datetime.now().strftime('%H:%M:%S')
+        tipo_ponto = "Tempo Real"
+        return (hora_entrada, tipo_ponto)
+
+    def almoco():
+        hora_almoço = datetime.now().strftime('%H:%M:%S')
+        return (hora_almoço)
+    
+    def saida():
+        hora_saida = datetime.now().strftime('%H:%M:%S')
+        return (hora_saida)
+
+
+    def localização():
+        localização = localização
+
+
+
+class completar():
     def justificativa(self, id_funcionario, motivo_atraso, motivo_ausencia, atestado, solicitaçao):
         self.id_funcionario = id_funcionario
         self.motivo_atraso = motivo_atraso

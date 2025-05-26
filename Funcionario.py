@@ -1,6 +1,8 @@
 import sqlite3 
 from tkinter import *
-
+from datetime import datetime
+import geocoder
+import folium
 
 class Server():
     def __init__(self, db_path='ponto.db'):
@@ -22,16 +24,72 @@ class Contrato():
         self.fim_contrato = fim_contrato
         self.salario = salario
         self.cargo = cargo
-    
 
-class Funcionario():
-    def __init__(self, name, cpf, data_nascimento, endereço: Endereço, contrato: Contrato):
+class cadastro():
+    
+    def __init__(self, name, cpf, data_nascimento, contatos: Contatos, endereço: Endereço, contrato: Contrato ):
         self.name = name
         self.cpf = cpf
         self.data_nascimento = data_nascimento
         self.endereço = endereço
         self.contrato = contrato
-    
+        self.contatos = contatos
+        self.server = Server()
+
+    def cadastrar_funcionarios(self, name, cpf, data_nascimento, contatos: Contatos, endereço: Endereço, contrato: Contrato, login, senha, autoridade):
+
+        with sqlite3.connect(self.server.db_path) as connection:
+            cursor = connection.cursor()
+
+
+            insert_funcionario = '''
+                INSERT INTO FUNCIONARIO (NAME, CPF, DATA_NASCIMENTO, CELULAR, E-MAIL, ENDEREÇO, INICIO_DO_CONTRATO, FIM_DO_CONTRATO, SALARIO, CARGO)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            '''
+
+            funcionario_inf = (name, cpf, data_nascimento, contatos.celular, contatos.email, endereço, contrato.inicio_contrato, contrato.fim_contrato, contrato.salario, contrato.cargo)
+
+            cursor.execute(insert_funcionario, funcionario_inf)
+            connection.commit()
+
+            print('Funcionário Cadastrado com Sucesso')
+
+            id_funcionario = cursor.lastrowid
+
+            insert_query = '''
+                INSERT INTO LOGIN (ID_FUNCIONARIO, LOGIN, SENHA, AUTORIDADE)
+                VALUES (?, ?, ?)
+            '''
+
+            funcionario_cadas = (id_funcionario, login, senha, autoridade)
+
+            cursor.execute(insert_query, funcionario_cadas)
+            connection.commit()
+
+            print('Login criado')  
+
+
+class Funcionario():
+    def __init__(self, login, senha):
+        self.login = login
+        self.senha = senha
+        self.server = Server()
+
+    def alterar(self, new_senha):
+        with sqlite3.connect(self.server.db_path) as connection:
+            cursor = connection.cursor()
+
+            update_query = '''
+            UPDATE LOGIN
+            SET SENHA = ?
+            WHERE LOGIN = ?;
+            '''
+
+            cursor.execute(update_query, (new_senha, self.login))
+
+            connection.commit()
+
+
     def bater_ponto(self,):
         self.null
         
@@ -40,25 +98,12 @@ class Funcionario():
         
     def banco_horas(self,):
         self.null    
-        
-        
-    def cadastrar_funcionarios(self, name, cpf, data_nascimento, endereço: Endereço, contrato: Contrato):
-
-        with sqlite3.connect(self.server.db_path) as connection:
-            cursor = connection.cursor()
 
 
-            insert_query = '''
-                INSERT INTO FUNCIONARIO (NAME, CPF, DATA_NASCIMENTO, ENDEREÇO, INICIO_DO_CONTRATO, FIM_DO_CONTRATO, SALARIO, CARGO)
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-            '''
 
-            funcionario_inf = (name, cpf, data_nascimento, endereço, contrato.inicio_contrato, contrato.fim_contrato, contrato.salario, contrato.cargo)
-
-            cursor.execute(insert_query, funcionario_inf)
-            connection.commit()
-
-            print('Funcionário Cadastrado com Sucesso')
+class analista(Funcionario):
+    def __init__(self, login, senha):
+        super().__init__(login, senha)
 
     def Listar_Funcionarios(self):
         
@@ -75,6 +120,19 @@ class Funcionario():
             print("Aqui todos os Funcionarios cadastrados e seus cargos: ")
             for funcionario in funcionarios:
                 print(funcionario)
+
+
+
+class RH(analista):
+    def __init__(self, ID, name, cpf, data_nascimento, endereço: Endereço, contrato: Contrato, login, senha):
+        super().__init__(login, senha)
+        self.ID = ID
+        self.name = name
+        self.cpf = cpf
+        self.data_nascimento = data_nascimento
+        self.endereço = endereço
+        self.contrato = contrato
+        self.server = Server()
     
     def Atualizar_Funcionario(self, ID, name, cpf, data_nascimento, endereço: Endereço, contrato: Contrato):
 
@@ -127,3 +185,4 @@ class Funcionario():
             connection.commit()
 
             print(f"Funcionário {name} deletado e movido para pelo motivo: {motivo}")
+
