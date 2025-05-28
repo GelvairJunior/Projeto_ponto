@@ -1,26 +1,44 @@
 import sqlite3
 from datetime import datetime
+from email_validator import validate_email, EmailNotValidError
+import phonenumbers
+from phonenumbers.phonenumberutil import NumberParseException
 import geocoder
-
 
 class Server():
     def __init__(self, db_path='ponto.db'):
         self.db_path = db_path
 
+
 class Ponto_register():
+
     def __init__(self, ID_funcionario):
         self.ID_funcionario = ID_funcionario
         self.server = Server()
+
+    def alterar(self, new_senha):
+        with sqlite3.connect(self.server.db_path) as connection:
+            cursor = connection.cursor()
+
+            update_query = '''
+            UPDATE LOGIN
+            SET SENHA = ?
+            WHERE LOGIN = ?;
+            '''
+
+            cursor.execute(update_query, (new_senha, self.login))
+
+            connection.commit()
 
 
     def locali(self):
         g = geocoder.ip('me')
         if g.ok:
-            latitude = g.latlng[0] if g.latlng else None
-            longitude = g.latlng[1] if g.latlng else None
-            rua = g.street or "Desconhecido"
-            cidade = g.city or "Desconhecido"
-            estado = g.state or "Desconhecido"
+            latitude = g.latlng[0] or None,
+            longitude = g.latlng[1] or None,
+            rua = g.street or "Desconhecido",
+            cidade = g.city or "Desconhecido",
+            estado = g.state or "Desconhecido",
             cep = g.postal or "00000-000"
             return latitude, longitude, rua, cidade, estado, cep
         else:
@@ -91,7 +109,8 @@ class Ponto_register():
             '''
             cursor.execute(insert_local, (id_ponto, longitude, latitude, rua, cidade, estado, cep))
 
-            conn.commit()           
+            conn.commit()        
+    
     
     def saida(self, id_ponto):
         hora_saida = datetime.now().strftime('%H:%M:%S')
@@ -115,13 +134,25 @@ class Ponto_register():
             cursor.execute(insert_local, (id_ponto, longitude, latitude, rua, cidade, estado, cep))
 
             conn.commit()
-
-class Ponto_register_aplicado():
-    def __init__(self, ID_funcionario):
-        self.ID_funcionario = ID_funcionario
-        self.server = Server()
     
-class Ponto_register_modificado():
-    def __init__(self, ID_funcionario):
-        self.ID_funcionario = ID_funcionario
-        self.server = Server()
+
+
+if __name__ == '__main__':
+    ID_funcionario = 2
+
+    # Cria uma instância da classe
+    ponto = Ponto_register(ID_funcionario)
+
+    # Chama os métodos da instância
+    id_ponto = ponto.register()
+    print(f'Ponto registrado com ID: {id_ponto}')
+
+    # Depois (em horários diferentes):
+    ponto.entrada(id_ponto)
+    print('Entrada registrada.')
+
+    ponto.almoco(id_ponto)
+    print('Almoço registrado.')
+
+    ponto.saida(id_ponto)
+    print('Saída registrada.')
